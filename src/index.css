@@ -1,0 +1,116 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* ---------------------------------------------------------------------------
+   Design tokens.
+   Default (:root) is the dark theme — matching PennyTrack's default — so there
+   is no flash on first paint. Light values apply when the `dark` class is
+   removed from <html> (managed by SettingsProvider).
+--------------------------------------------------------------------------- */
+:root {
+  color-scheme: dark;
+  --c-base: #0b1020;
+  --c-surface: #141b2d;
+  --c-surface-2: #1a2338;
+  --c-elevated: #1a2338;
+  --c-primary: #35d39a;
+  --c-secondary: #6ea8fe;
+  --c-text: #f4f7fc;
+  --c-text-muted: #9aa7bd;
+  --c-border: rgba(154, 167, 189, 0.16);
+  --c-danger: #f87171;
+  --c-warn: #fbbf24;
+  --c-ok: #35d39a;
+}
+
+html:not(.dark) {
+  color-scheme: light;
+  --c-base: #f4f7fc;
+  --c-surface: #ffffff;
+  --c-surface-2: #eef2f9;
+  --c-elevated: #ffffff;
+  --c-primary: #10b981;
+  --c-secondary: #3b82f6;
+  --c-text: #0b1020;
+  --c-text-muted: #5b6b82;
+  --c-border: rgba(11, 16, 32, 0.1);
+  --c-danger: #ef4444;
+  --c-warn: #d97706;
+  --c-ok: #10b981;
+}
+
+@layer base {
+  * {
+    -webkit-tap-highlight-color: transparent;
+  }
+
+  html,
+  body,
+  #root {
+    min-height: 100%;
+  }
+
+  body {
+    background-color: var(--c-base);
+    color: var(--c-text);
+    font-family: Inter, system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+    -webkit-font-smoothing: antialiased;
+    text-rendering: optimizeLegibility;
+    overscroll-behavior-y: none;
+  }
+
+  /* Comfortable, accessible touch targets. */
+  button,
+  a,
+  input,
+  select,
+  textarea {
+    touch-action: manipulation;
+  }
+
+  input,
+  select,
+  textarea {
+    font-size: 16px; /* prevents iOS/Android zoom-on-focus */
+  }
+
+  /* Thinner, subtle scrollbars. */
+  ::-webkit-scrollbar {
+    width: 6px;
+    height: 6px;
+  }
+  ::-webkit-scrollbar-thumb {
+    background: var(--c-border);
+    border-radius: 999px;
+  }
+
+  [role="switch"] {
+    -webkit-appearance: none;
+    appearance: none;
+  }
+}
+
+@layer utilities {
+  /* Hide number input spinners. */
+  input[type="number"]::-webkit-outer-spin-button,
+  input[type="number"]::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+  }
+  input[type="number"] {
+    -moz-appearance: textfield;
+  }
+  input[type="date"]::-webkit-calendar-picker-indicator,
+  input[type="time"]::-webkit-calendar-picker-indicator {
+    filter: invert(var(--picker-invert, 0));
+  }
+}
+
+/* Match date/time picker indicator to theme. */
+html:not(.dark) {
+  --picker-invert: 0;
+}
+.dark {
+  --picker-invert: 1;
+}

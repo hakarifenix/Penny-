@@ -1,0 +1,7 @@
+<?xml version='1.0' encoding='utf-8'?>
+<resources>
+    <string name="app_name">PennyTrack</string>
+    <string name="title_activity_main">PennyTrack</string>
+    <string name="package_name">com.pennytrack.app</string>
+    <string name="custom_url_scheme">com.pennytrack.app</string>
+</resources>
